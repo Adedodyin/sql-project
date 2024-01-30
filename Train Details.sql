@@ -67,7 +67,7 @@ SELECT AVG(fixed_table.Distance) AS average_distance
 FROM fixed_table;
 
 
-/* To find the train with longest ride length*/
+/* To find the train with the longest ride length*/
 SELECT TOP 1(fixed_table.[Train No]), MAX(fixed_table.duration) AS longest_ride_length
 FROM fixed_table
 GROUP BY fixed_table.[Train No]
@@ -78,3 +78,40 @@ SELECT fixed_table.[Source Station Name], fixed_table.[Destination Station Name]
 FROM fixed_table
 GROUP BY fixed_table.[Source Station Name], fixed_table.[Destination Station Name]
 ORDER BY Frequency DESC;
+
+
+/* To find the unique stations in the dataset*/
+SELECT COUNT(DISTINCT fixed_table.[Station Name]) AS unique_stations 
+FROM fixed_table;
+
+/* To find the stations with the highest and lowest average duration */
+SELECT TOP 5 fixed_table.[Station Name], AVG(fixed_table.duration) AS average_ride_length
+FROM fixed_table
+GROUP BY fixed_table.[Station Name]
+ORDER BY average_ride_length DESC;
+
+SELECT TOP 5 fixed_table.[Station Name], AVG(fixed_table.duration) AS average_ride_length
+FROM fixed_table
+GROUP BY fixed_table.[Station Name]
+ORDER BY average_ride_length ASC;
+
+/* To find the station which serves as start and destination */
+
+SELECT DISTINCT ft1.[Source Station Name]
+FROM fixed_table ft1
+JOIN fixed_table ft2 ON 
+ft1.[Station Name] = ft2.[Station Name] 
+WHERE ft1.[Train No] <> ft2.[Train No]
+ORDER BY ft1.[Source Station Name];
+
+/* To find the source station that has the most destinations */
+SELECT fixed_table.[Source Station Name] , COUNT(fixed_table.[Destination Station Name]) AS most_destinations 
+FROM fixed_table
+GROUP BY fixed_table.[Source Station Name]
+ORDER BY most_destinations DESC;
+
+/*To find the destination station that has the most sources */
+SELECT fixed_table.[Destination Station Name], COUNT(fixed_table.[Source Station Name]) AS most_sources 
+FROM fixed_table
+GROUP BY fixed_table.[Destination Station Name]
+ORDER BY most_sources DESC;
