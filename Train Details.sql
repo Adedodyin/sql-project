@@ -115,3 +115,9 @@ SELECT fixed_table.[Destination Station Name], COUNT(fixed_table.[Source Station
 FROM fixed_table
 GROUP BY fixed_table.[Destination Station Name]
 ORDER BY most_sources DESC;
+
+/*To find the trains that cover the most distance in the dataset*/
+SELECT TOP 10 fixed_table.[Train No], MAX(fixed_table.[Distance]) AS max_distance 
+FROM fixed_table 
+GROUP BY fixed_table.[Train No]
+ORDER BY max_distance DESC;
