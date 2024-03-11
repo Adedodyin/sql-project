@@ -1,0 +1,12 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (10) [transaction_id]
+      ,[customer_id]
+      ,[payment_method]
+      ,[total_amount]
+      ,[payment_date]
+      ,[items_purchased]
+      ,[quantity]
+      ,[unit_price]
+      ,[discount_amount]
+      ,[store_location]
+  FROM [Case Study].[dbo].[retail_store]
